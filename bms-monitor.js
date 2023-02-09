@@ -1,18 +1,14 @@
 const {expect} = require('chai');
+const batteryIsOk=require('./batteryCheck');
 
-function batteryIsOk(temperature, soc, charge_rate) {
-    if (temperature < 0 || temperature > 45) {
-        console.log('Temperature is out of range!');
-        return false;
-    } else if (soc < 20 || soc > 80) {
-        console.log('State of Charge is out of range!')
-        return false;
-    } else if (charge_rate > 0.8) {
-        console.log('Charge rate is out of range!');
-        return false;
-    }
-    return true;
-}
+const testCases = [
+    { temperature: 25, soc: 70, charge_rate: 0.7, expectedResult: true },
+    { temperature: -5, soc: 60, charge_rate: 0.6, expectedResult: false },
+    { temperature: 40, soc: 90, charge_rate: 0.7, expectedResult: false },
+    { temperature: 30, soc: 75, charge_rate: 0.9, expectedResult: false },
+];
 
-expect(batteryIsOk(25, 70, 0.7)).to.be.true;
-expect(batteryIsOk(50, 85, 0)).to.be.false;
+testCases.forEach((testCase) => {
+    const result = batteryIsOk(testCase.temperature, testCase.soc, testCase.charge_rate);
+    expect(result).to.equal(testCase.expectedResult);
+});
