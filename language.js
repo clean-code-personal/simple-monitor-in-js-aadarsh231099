@@ -37,6 +37,6 @@ const messages = {
       },
 
   };
-const lang= 'fr';
+const lang= 'en';
 
 module.exports=messages[lang];
