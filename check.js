@@ -3,10 +3,10 @@ function isValid(input, min, max, criteria, warningTolerance) {
         console.log(`${criteria} is out of range!`);
         return false;
     }
-    else if (input < min + warningTolerance ||  input > max - warningTolerance) {
-        console.log(`Warning: ${criteria} is approaching limit!`);
+    else if (input > min + warningTolerance && input < max - warningTolerance ) {
         return true;
     }
+    console.log(`Warning: ${criteria} is approaching limit!`);
     return true;
 }
 
